@@ -16,7 +16,8 @@ def register_users(users):
     username = input("Username: ")
     while username in users:
         print("Username is taken.")
-        print("Username: ")
+        new_username = input("Username: ")
+        username = new_username 
 
     password = input("Password: ") 
     #turns the string into bytes for hashing 
@@ -27,6 +28,30 @@ def register_users(users):
     users[username] = hashed_password
     save_data(users)
     print("Regisered successfully!")
+
+def login_user(users):
+    username = input("Enter username: ")
+    while username not in users:
+        print("Invalid username or password.")
+        new_username = input("Username: ")
+        username = new_username 
+
+
+    password = input("Password: ") 
+    password_bytes = password.encode('utf-8')
+    hashed_password = hashlib.sha256(password_bytes).hexdigest()
+
+    if users[username] == hashed_password:
+        print("Login successful! ")
+        return True
+    
+    else:
+        print("Invalid username or password. ")
+        return False
+
+
+
+
 
     
 
