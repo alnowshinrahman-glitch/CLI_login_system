@@ -35,12 +35,12 @@ def login_user(users):
         print("Invalid username or password.")
         new_username = input("Username: ")
         username = new_username 
-
-
+       
     password = input("Password: ") 
     password_bytes = password.encode('utf-8')
     hashed_password = hashlib.sha256(password_bytes).hexdigest()
 
+   #compares the hashed password to the stored password
     if users[username] == hashed_password:
         print("Login successful! ")
         return True
@@ -48,21 +48,27 @@ def login_user(users):
     else:
         print("Invalid username or password. ")
         return False
-
-
-
-
-
     
+def main():
+    users = load_data()
+    while True:
+        print("1.Register")
+        print("2.Login")
+        print("3.Exit")
+        choice = input("Enter an option: ")
+        if choice == "1":
+            register_users(users)
+        elif choice == "2": 
+            #this variable saves the result of True or False
+            success = login_user(users)
+            if success:
+                print("Welcome!")
 
-
-
-    
-    
-    
-
-
-
-    
-    
-    
+        elif choice == "3":
+            print("Goodbye!")
+            return False
+        
+if __name__ == "__main__" :
+ main()
+   
+        
